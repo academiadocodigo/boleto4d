@@ -1,0 +1,1291 @@
+{******************************************************************************}
+{ Projeto: Componentes ACBr                                                    }
+{  Biblioteca multiplataforma de componentes Delphi para interação com equipa- }
+{ mentos de Automação Comercial utilizados no Brasil                           }
+{                                                                              }
+{  Você pode obter a última versão desse arquivo na página do Projeto ACBr     }
+{ Componentes localizado em      http://www.sourceforge.net/projects/acbr      }
+{                                                                              }
+{  Esta biblioteca é software livre; você pode redistribuí-la e/ou modificá-la }
+{ sob os termos da Licença Pública Geral Menor do GNU conforme publicada pela  }
+{ Free Software Foundation; tanto a versão 2.1 da Licença, ou (a seu critério) }
+{ qualquer versão posterior.                                                   }
+{                                                                              }
+{  Esta biblioteca é distribuída na expectativa de que seja útil, porém, SEM   }
+{ NENHUMA GARANTIA; nem mesmo a garantia implícita de COMERCIABILIDADE OU      }
+{ ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA. Consulte a Licença Pública Geral Menor}
+{ do GNU para mais detalhes. (Arquivo LICENÇA.TXT ou LICENSE.TXT)              }
+{                                                                              }
+{  Você deve ter recebido uma cópia da Licença Pública Geral Menor do GNU junto}
+{ com esta biblioteca; se não, escreva para a Free Software Foundation, Inc.,  }
+{ no endereço 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.          }
+{ Você também pode obter uma copia da licença em:                              }
+{ http://www.opensource.org/licenses/lgpl-license.php                          }
+{                                                                              }
+{ Daniel Simões de Almeida - daniel@projetoacbr.com.br - www.projetoacbr.com.br}
+{       Rua Coronel Aureliano de Camargo, 963 - Tatuí - SP - 18270-170         }
+{******************************************************************************}
+{******************************************************************************
+|* ACBr
+|*
+|* PROPÓSITO: Registro de Alterações
+******************************************************************************}
+
+Símbolo : Significado
+
+[+]     : Novo recurso
+[*]     : Recurso modificado/melhorado
+[-]     : Correção de Bug (assim esperamos)
+
+Data: 22/10/2020
+-- ACBrUtil --
+[+] Adicionado novo método, PosExA, para funcionar sem a necessidade de converter
+    AnsiStrings para Strings.
+    function PosExA(const SubStr, S: AnsiString; Offset: Integer = 1): Integer;
+    (por: DSA)
+
+-- ACBrImage --
+[-] Ajuste em "BMPMonoToRasterStr", para imagens que informam o valor de
+    "Pixel Array", inválido.
+    https://www.projetoacbr.com.br/forum/topic/59745-configuração-correta-para-impressão-de-imagem/
+    (por: DSA)
+
+Data: 22/09/2020
+-- ACBrBase --
+[+] TACBrInformacao, adicionada a propriedade: "AsBoolean"
+[+] TACBrInformacao, adicionada a propriedade: "Tipo: TACBrInformacaoTipo"
+      TACBrInformacaoTipo = ( tiString, tiAnsiString, tiBoolean,
+                              tiInteger, tiInt64, tiFloat,
+                              tiDate, tiTime, tiDateTime);
+[+] TACBrInformacoes, adicionado sobrecarga no método:
+    function AddField(const AName: String): TACBrInformacao;
+    (por: DSA)
+
+Data: 07/07/2020
+-- ACBrBase --
+[+] Nova propriedade na Classe TACBrInformacao.AsInt64
+    (por: DSA)
+
+Data: 03/07/2020
+-- ACBrBase --
+[*] Ajuste em "TACBrInformacao.GetAsDate", para suportar Datas no formato DDMMYY
+    (por: DSA)
+
+Data: 26/06/2020
+-- ACBrBase, ACBrReg --
+[*] Ajustes no endereço de URL do ACBr, em TACBrAboutDialogProperty
+
+-- ACBrBase --
+[*] "TACBrThreadTimer.Destroy", modificação para que o método "WaitFor" sempre
+    seja chamado, antes da liberar, pois o "OnTimer" pode ainda estar em execução
+    (por: DSA)
+
+Data: 27/05/2020
+-- ACBr.inc --
+[-] Ajuste para compilação em Android FMX, com Delphi 10.4 Sidney
+    (por: DSA)
+
+Data: 12/05/2020
+-- ACBrUtil --
+[+] Ajustes para use de UTF8 por padrão, em NEXTGEN, Android, e POSIX, Linux
+    (por: DSA)
+
+Data: 20/04/2020
+-- ACBrUtil --
+[+] Adicionado método "RemoverQuebraLinhaFinal" para tratar retornos de 
+    TStrings.Text.
+  Por: BigWings
+
+Data: 19/04/2020
+-- ACBrUtil --
+[+] Adicionados novos métodos, para manipulação de Strings em AnsiString,
+    para evitar a perda do Encodig da Página de Código
+   function PadRightA(const AAnsiString : AnsiString; const nLen : Integer;
+     const Caracter : AnsiChar = ' ') : AnsiString;
+   function PadLeftA(const AAnsiString : AnsiString; const nLen : Integer;
+     const Caracter : AnsiChar = ' ') : AnsiString;
+   function PadCenterA(const AAnsiString : AnsiString; const nLen : Integer;
+     const Caracter : AnsiChar = ' ') : AnsiString;
+[-] Método "TranslateString", corrigido para trabalhar corretamente em Delphi,
+    Linux POSIX
+[*] Método "AcharProximaTag" modificado para trabalhar corretamente com
+    AnsiStrings
+    (por: DSA)
+
+Data: 15/04/2020
+-- ACBrBase -- 
+[-] Correção em Busca "bubble sort", de TACBrObjectList. 
+    Ajuste para localização no menor "Match", exato
+    (por: DSA)
+
+Data: 30/03/2020
+-- ACBrUtil --
+[*] Método "WriteToFile", com assinatura modificada, incluindo o parâmetro "ForceDirectory"
+    Procedure WriteToFile( const Arq: String; const ABinaryString : AnsiString;
+       const ForceDirectory : Boolean = False);
+    (por: DSA)
+
+Data: 27/03/2020
+-- ACBrUtil --
+[*] Método "FindSubDirectories", aplicado correção para funcionamento em ANDROID
+
+-- ACBrBase --
+[+] Adicionada a Classe "THttpHeader", usada em TACBrWinReqResp e TDFeSSLHttpClass
+    (por: DSA)
+
+Data: 06/03/2020
+-- ACBrUtil --
+[-] Correção em PadLeft, PadRight, e PadCenter, para funcionar corretamente com
+    Strings em UTF8, no FPC
+    (por: DSA)
+
+Data: 21/02/2020
+-- ACBrUtil --
+[*] Método AcharProximaTag modificado para receber parâmetro de Entrada, como AnsiString
+
+-- ACBrBase --
+[+] Adicionada classe "TAnsiStringList", para evitar problemas de conversão de
+    AnsiString para String.
+
+-- ACBrImage --
+[*] Métodos "RasterStrToColumnStr" e "AscIIToColumnStr" modificados para usar
+    TAnsiStringList ao invez de TStringList, para funcionar corretamente em NEXTGEN
+    (por: DSA)
+
+Data: 07/02/2020
+-- ACBrBase --
+[+] Criado novo PID, "piacbrAllDesktopPlatforms", para ser usado nos componentes
+    que não fazem sentido para Mobile
+[*] TACBrObjectList, novos ajustes para compiladores NEXTGEN
+    (por: DSA)
+	
+-- ACBr.inc --
+[+] Novas verificações e chaves, para definir se usa a Classe JSonDataObjects	
+    (por: DSA)
+		
+Data: 23/01/2020
+-- ACBrUtil --
+[*] Revisão de alguns métodos que usavam AnsiString desnecessáriamente
+[*] Otimização e remoção de Hints
+[+] Adicionado o método: function GetFileVersion(AFile: String): String;
+
+-- ACBrImage --
+[*] Otimização e remoção de Hints
+    (por: DSA)
+
+Data: 26/12/2019
+-- ACBrUtil, ACBrBase, ACBr.inc, ACBrImage --
+[*] Ajustes para compilação em FMX, Linux
+    (por: DSA, Waldir Paim e Silvio Clecio)
+
+Data: 02/12/2019
+-- ACBrImage --
+[-] Ajuste no método "BMPMonoToRasterStr", para tratar corretamente imagens com
+    sobra de Bits a esquerda
+    (por: DSA)
+
+Data: 01/12/2019
+-- ACBrBase --
+[+] Classe "TACBrInformacao", Adiconada a propriedade "AsBinary", para processar
+    corretamente Strings com caracteres de controle
+[*] Classe "TACBrInformacoes":
+    - Método "Add" modificado para ficar compatível com classe ancestral.
+    - Adicionado o método "Insert", compatível com ancestral
+    - Adicionado o metodo "New: TACBrInformacao", com a mesma funcionalidade do antigo "Add"
+    (por: DSA)
+
+Data: 27/09/2019
+-- ACBrUtil --
+[*] Melhorias na validação do Arquivo ini na função LerIniArquivoOuString
+    (por: José M. S. Junior)
+
+Data: 02/08/2019
+-- ACBrUtil --
+[*] Método "HexToAscii" modificado para causar um exception, no caso de valor
+    inválido
+[+] Adicionado os métodos:
+    function TryHexToAscii(const HextStr: String; out Value: AnsiString): Boolean;
+    function HexToAsciiDef(const HexStr: String; const Default: AnsiString): AnsiString;
+    (por: BigWings e DSA)
+
+Data: 24/05/2019
+-- ACBrImage --
+[-] Correção nos métodos "BMPMonoToRasterStr", "AscIIToRasterStr",
+    "AscIIToColumnStr" e "BitmapToRasterStr", para evitar problemas de conversão
+    de Char para AnsiChar
+    (por: DSA)
+
+Data: 26/04/2019
+-- ACBrUtil --
+[*] Ajustes de validação do Separador Data e Hora na função StringToDateTime.
+    (por: José M. S. Junior)
+
+Data: 06/02/2019
+-- ACBrUtil --
+[*] Inclusão de parâmetro nos métodos "SeparaDados" e "SeparaDadoArray" para
+    permitir a leitura de chaves com qualquer prefixo.
+[*] Inclusão de parâmetro no método "PadSpace" para não remover os espaços
+    (Trim) do retorno final.
+    (por: BigWings)
+
+Data: 31/01/2019
+-- ACBrUtil --
+[*] Otimização do método "TestBit"
+[+] Adicionados vários métodos para manipulação de Bits
+    procedure ClearBit(var AValue: Integer; const AIndex: Byte);
+    procedure SetBit(var AValue: Integer; const AIndex: Byte);
+    procedure PutBit(var AValue: Integer; const AIndex: Byte; State: Boolean);
+    http://wiki.freepascal.org/Bit_manipulation
+    (por: DSA)
+
+Data: 27/01/2019
+-- ACBrImage --
+[+] Adicionado novos métodos, para permitir o uso de Bitmaps em comandos legados
+    de Esc/Pos, que apenas operam po NV Bitmap (definição de imagem por coluna)
+   procedure RasterStrToColumnStr(const ARasterStr: AnsiString; AWidth: Integer;
+     ColumnSliceLines: TStrings; BytesPerSlice: Integer = 3);
+   procedure AscIIToColumnStr(AscIIArtLines: TStrings; out AWidth: Integer;
+     out AHeight: Integer; ColumnSliceLines: TStrings; BytesPerSlice: Integer = 3);
+[-] Ajuste no método "BMPMonoToRasterStr", para evitar erros quando o BitMap não
+    possui a informação de tamanho do "Pixel Array"
+   (por: DSA)
+
+Data: 19/01/2019
+-- ACBrImage --
+[*] Método "BMPToRasterStr" renomeado para "BMPMonoToRasterStr"
+[-] Corrigido Bug em "BMPMonoToRasterStr", para conseguir processar corretamente
+    imagens cuja largura não é multiplo de 32
+[+] Adiconado o método:
+    procedure RasterStrToBMPMono(ARasterStr: AnsiString; AWidth: Integer;
+      InvertImg: Boolean; ABMPStream: TStream);
+    - Para permite converter uma String em Raster para um BMP Mono. O conteúdo
+      do BMP será salvo em ABMPStream.
+[+] Adiconado o método:
+    procedure BitmapToRasterStr(ABmpSrc: TBitmap; InvertImg: Boolean;
+      out AWidth: Integer; out AHeight: Integer; out ARasterStr: AnsiString;
+      LuminosityThreshold: Byte = C_LUMINOSITY_THRESHOLD);
+    - Somente disponível se não for compilação em modo console {$IfNDef NOGUI}
+    - Permiter converter qualquer BitMap, Colorido ou em escala de Cinza, gerando
+      uma String no formato Raster do equivalente em Monocromático
+    (por: DSA)
+
+-- ACBrUtil --
+[+] Adicionado os métodos:
+    function StrIsBinary(const S: String): Boolean;
+    function StrIsBase64(const S: String): Boolean;
+    function CharIsBinary(const C: Char): Boolean;
+    function CharIsBase64(const C: Char): Boolean;
+    (por: DSA)
+
+Data: 16/01/2019
+-- ACBrImage --
+[+] Adicionado novos métodos, para permitir transforma um BMP em ASCII ART e
+    vice-versa:
+    procedure RasterStrToAscII(AWidth: Integer; const RasterStr: AnsiString;
+      AscIIArtLines: TStrings);
+    procedure AscIIToRasterStr(AscIIArtLines: TStrings; var AWidth: Integer;
+      var AHeight: Integer; var RasterStr: AnsiString);
+[-] Método "BMPToRasterStr", corrigido para não inverter Bits não utilizados
+    no final da Imagem
+
+Data: 14/01/2019
+-- ACBrImage --
+[+] Adicionada nova Unit ACBrImage.pas, para permitir a manipulaçao de Imagens
+    BMP, PCX, que serão usadas em ACBrPosPrinter e ACBrETQ
+    (por: DSA)
+
+Data: 11/01/2019
+-- ACBrUtil --
+[*] Ajuste no método "XmlEhUTF8", para permitir Aspas Simples na Declaração de XML
+    (por: DSA)
+
+Data: 19/19/2018
+-- ACBr.inc --
+[*] Desabilitada por padrão a diretiva $DEFINE USE_MINGW
+	(por: Celso Marigo Junior)
+
+Data: 19/19/2018
+-- ACBr.inc --
+[-] Ajustada diretiva de compilação que removia suporte a libXmlSec
+	(por: Celso Marigo Junior)
+	
+Data: 17/12/2018
+-- ACBrUtil --
+[-] Correção para o método "QuebraLinhas", que removia LineBreaks consecutivos
+    (por: DSA)
+
+Data: 11/12/2018
+-- ACBrUtil --
+[+] Adicionado o método:
+    function InserirDeclaracaoXMLSeNecessario(const AXML: String; const ADeclaracao: String): String;
+      Insere uma Declaração no XML, caso o mesmo não tenha nenhuma
+      Se "ADeclaracao" não for informado, usará '<?xml version="1.0" encoding="UTF-8"?>'
+    (por: DSA)
+
+Data: 09/08/2018
+-- ACBrUtil --
+[*] Método "FindFiles", teve sua assinatura modificada, para permitir retornar os
+    arquivos ordenados por Nome ou Data/Hora; Ascendente ou Descendente
+    Procedure FindFiles( const FileMask : String; AStringList : TStrings;
+      IncludePath : Boolean = True;
+      SortType: TFindFileSortType = fstNone;
+      SortDirection: TFindFileSortDirection = fsdNone );
+    (por: DSA)
+[*] Melhoria no método "ParseText", para usar substituição mais rápida do que
+    StringReplace
+    https://www.projetoacbr.com.br/forum/topic/33768-parsetext-stringreplace-lento/
+
+Data: 06/08/2018
+-- ACBrUtil --
+[*] Migrado a procedure LerIniArquivoOuString de ACBrDFeUtil para classe ACBrUtil, devido utilização fora 
+    das classes do DFe. 
+
+Data: 21/05/2018
+-- ACBrConsts --
+[+] Adicionadas novas constantes para o uso de "Modo Página", no ACBrPosPrinter
+
+Data: 10/05/2018
+-- ACBrUtil --
+[*] Método "WriteToTXT". Ajuste para permitir a criação de Arquivos vazios (touch)
+    Otimização na verificação da criação ou não do diretório
+    (por: DSA)
+
+Data: 23/04/2018
+-- ACBrUtil --
+[-] Aplicado Workround para BUG em FPC em:
+    function FormatFloatBr(const AFormat: TFormatMask; const AValue: Extended): String;
+    https://www.projetoacbr.com.br/forum/topic/42922-cteimprimirdactepdf-falta-ponto/
+    (por: DSA)
+
+Data: 06/04/2018
+-- ACBr.Inc --
+[+] Adicionado suporte a diretiva:   {$DEFINE HAS_STRICTDELIMITER}
+
+-- ACBrUtil --
+[*] Modificada a assinatura do método "AddDelimitedTextToList" para:
+    function AddDelimitedTextToList( const AText: String; const ADelimiter: Char;
+      AStringList: TStrings; const AQuoteChar: Char = '"'): Integer;
+    Informe AQuoteChar := #0, para que as Aspas Duplas sejam ignoradas, no
+    calculo da separação de Linhas
+    (por: DSA)
+
+Data: 04/04/2018
+-- ACBrBase --
+[+] Adicionada propriedade possibilitando definir numero de digitos nos campos float em ACBrInformacao
+[+] Adicionada função FieldExists em ACBrInformacoes
+    (por: Celso Marigo Junior)
+
+Data: 06/03/2018
+-- ACBrUtil --
+[*] Refactoring no método "Split" para utilizar método já implementado "AddDelimitedTextToList"
+[*] Ajuste no método "AddDelimitedTextToList" para utilizar propriedade "StrictDelimiter" do
+    Delphi 2006 ou superior
+    (por: BigWings)
+
+
+Data: 26/01/2018
+-- ACBrBase --
+[+] Adidciona a classe "TACBrObjectList", que implementa uma TObjectTist
+    (por: DSA)
+
+Data: 15/01/2018
+-- ACBr.Inc --
+[+] Adicionado suporte as diretivas {$DEFINE DFE_SEM_MSXML} e {$DEFINE DFE_SEM_INDY}
+[+] Ajustes para Delphi POSIX
+    (por Waldir e DSA)
+
+Data: 09/01/2018
+-- ACBrUtil --
+[-] Correção no método "WriteToTXT", que tentava criar diretório, mesmo quando
+    não definido
+[*] Parâmetro "ForceDirectory" do método "WriteToTXT", modificado por Default
+    para "False", por motivos de performance
+    (por: DSA)
+
+Data: 07/01/2018
+-- ACBrUtil --
+[-] Ajuste em método "StrCrypt", para suportar Parâmetros vazios
+[*] Método "RetornarConteudoEntre", adicionado o parâmetro "IncluiInicioFim: Boolean
+    default False
+    (por: DSA)
+
+Data: 26/12/2017
+-- ACBrUtil --
+[*] Ajuste no método "WriteToTXT", para não tentar gravar algo, se o nome do
+    arquivo ou o conteúdo a ser gravado, não foi informado
+    (por: DSA)
+
+Data: 23/12/2017
+-- ACBrUtil --
+[*] Ajustes para compilação em POSIX
+[*] Otimizações no código
+[*] Método "WriteToTXT", modificado para Criar o diretório de Destino, caso o
+    mesmo não exista, e se o Parâmetro: "ForceDirectory" estiver True (default)
+    (por: Waldir Paim e DSA)
+
+Data: 07/12/2017
+-- ACBrAAC --
+[-] Ajuste para o correto calculo do CRC quando o mesmo arquivo é aberto em
+    Windows e Linux
+    (por: DSA)
+
+Data: 04/12/2017
+-- ACBrUtil --
+[+] Adicionado o método:
+    procedure EncontrarInicioFinalTag(aText, ATag: ansistring;
+       var PosIni, PosFim: integer);
+    (por: Rafael Teno)
+
+-- ACBr.inc --
+[+] Adicionada nova diretiva, que por padrão está desabilitada:
+    {.$DEFINE DFE_SEM_XMLSEC}
+    Descomente essa linha, se você quer que seu Executável NÃO dependa das DLLs
+    de LibXMLSEC, mas continue suportando a LibXML2
+    (por: DSA)
+
+Data: 22/11/2017
+-- ACBrUtil --
+[*] Método "RetornarConteudoEntre", movido de pcnAuxiliar para ACBrUtil
+    (por: DSA)
+
+Data: 01/11/2017
+-- ACBrUtil --
+[-] Correção no método "ChangeLineBreak". Veja Testes em:
+     ACBrUtilTest.ChangeLineBreakTest
+    (por: DSA)
+
+Data: 28/09/2017
+-- ACBrUtil --
+[-] Correção no método "DesligarMaquina", para Linux... usando o comando
+    "shutdown"   (por: DSA)
+
+Data: 31/08/2017
+-- GZIPUtils --
+[-] Correção no método "unzipStream". Em algumas raras situações o Stream não
+    era descompatado, pois o código original da GZipUtils modificava o tamanho
+    do Stream de Entrada, o que não é esperado pot "Tdecompressionstream"
+    (por: DSA)
+
+Data: 21/08/2017
+-- ACBrCompress --
+[+] Adicionada nova Unit para centralizar todo tratamento da compactação e
+    descompactação de Strings e Streams, nos formatos ZLib, GZip e ZipFile.
+    Faz o uso nativo das classes de compactação do Lazarus/Delphi.
+    (por: DSA)
+
+-- ACBrUtil --
+[*] Métodos Zip e UnZip, modificados para usar a Unit ACBrCompress
+    (por: DSA)
+
+-- ACBr.inc --
+[*] Adicionado suporte a diretiva {$DEFINE USE_ZLibExGZ}, que permite usar as
+    Units da biblioteca ZLibExGZ ao invés das nativas do Delphi.
+    (Delphi XE e inferiores não tem suporte a GZip, nesse caso esta diretiva
+     sempre estará ligada)
+    (por: DSA)
+
+Data: 14/07/2017
+-- ACBrUtil --
+[+] Adicionado os métodos:
+    function FindDelimiterInText(const AText: String; ADelimiters: String): Char;
+      Encontra qual é o primeiro Delimitador usado, em "AText", em uma lista de
+      delimitadores, informada em "ADelimiters".
+      Se "ADelimiters" for vazio, usa como padrão ";,|"
+    function AddDelimitedTextToList(const AText: String; const ADelimiter: Char;
+       AStringList: TStrings): Integer;
+     Quebra a String "AText", em várias linhas, separando-a de acordo com a ocorrência
+     de "ADelimiter", e adiciona os Itens encontrados em "AStringList".
+     Retorna o número de Itens Inseridos
+[+] Adicionado novos testes em "ACBrComumTesteCases" para os novos métodos
+    (por: DSA)
+
+Data: 22/06/2017
+-- ACBrUtil --
+[+] Adicionado os métodos:
+    function IsWorkingDay(ADate: TDateTime): Boolean;
+      Retornar True, se a Data for de Segunda a Sexta-feira. Falso para Sábado e
+      Domingo
+    function WorkingDaysBetween(StartDate,EndDate: TDateTime): Integer;
+       Retornar o total de dias úteis em um período de datas, exceto feriados.
+    function IncWorkingDay(ADate: TDateTime; WorkingDays: Integer): TDatetime;
+      Retornar uma data calculando apenas dias úteis, a partir de uma data inicial,
+      exceto feriados.
+[+] Adicionado novos testes em "ACBrComumTesteCases" para os novos métodos
+    (por: Junior Santos e DSA)
+
+Data: 08/06/2017
+-- ACBrUtil --
+[*] Ajuste no método "UTF8ToNativeString", para que não retorne vazio, caso
+    ocorra falha nas rotinas de conversão de String, nativas do Delphi
+    http://www.projetoacbr.com.br/forum/topic/36234-cancelamento-com-erro-nao-encontrei-final-elemento/
+
+Data: 06/06/2017
+-- ACBrUtil --
+[+] Adicionado os métodos:
+    function IntToBEStr(AInteger: Integer; BytesStr: Integer = 2): AnsiString;
+    function BEStrToInt(ABEStr: AnsiString): Integer;
+    (por: DSA)
+
+Data: 24/05/2017
+-- ACBrUtil --
+[*] Ajuste para compilação em 64bits em versões inferiores a XE2
+    http://www.projetoacbr.com.br/forum/topic/36053-instalador-n%C3%A3o-compila-pacotes-para-delphi-102-tokyo-win64/?do=findComment&comment=241530
+    (por: bsoft)
+
+Data: 19/04/2017
+-- ACBrUtil --
+[-] Método "TruncFix". Correção de A.V. "Invalid floating point operation", quando
+    informado valores muito altos
+[+] Método "SimpleRoundToEX", passou a ser público
+    (por: DSA)
+
+Data: 12/04/2017
+-- ACBr.inc --
+[+] Adicionada a diretiva "DFE_SEM_NCRYPT", para permitir a compatibilidade em
+    Windows XP  (o padrão é desligada)
+    http://www.projetoacbr.com.br/forum/topic/36219-ncryptdll-faltando-no-xp/
+    (por: DSA)
+
+Data: 19/03/2017
+-- ACBr.inc --
+[+] Adicionada a diretiva "HAS_INLINE", para FPC ou DELPHI9_UP
+[*] Definição forçada para "USE_MINGW" modificado para ficar ligado quando não for
+    Windows   (por: DSA)
+
+Data: 08/02/2017
+-- ACBrUtil --
+[*] Ajuste para que RoundABNT suporte valores várias casas decimais.
+    http://www.projetoacbr.com.br/forum/topic/35068-roundabnt-invalid-floating-point-operation/
+    (por: PauloRSA)
+
+Data: 06/01/2017
+-- ACBrUtil --
+[*] Método "FloatMask", modificado a assunatura para:
+    function FloatMask(const DecimalDigits: SmallInt; UseThousandSeparator: Boolean = True): String;
+    Se "UseThousandSeparator = False", não retornará mascara com a inclusão de
+    Separadores de Milhar
+    (por: DSA)
+
+Data: 22/12/2016
+-- ACBrUtil --
+[*] Mudança pra lazarus entender a formatação.
+    http://www.projetoacbr.com.br/forum/topic/33727-impress%C3%A3o-dos-campos-peso-aferido-kg-e-nome-do-motorista/
+    http://www.projetoacbr.com.br/forum/topic/33721-impress%C3%A3o-do-campo-da-quantidade-de-volumes-e-tipo-rodado/
+    por: Juliomar Marchetti
+		
+Data: 21/12/2016
+-- ACBrUtil --
+[+] Adicionado os métodos:
+    function Zip(S: TStream): AnsiString; overload;
+    function Zip(const ABinaryString: AnsiString): AnsiString; overload;
+    (por: DSA)
+
+Data: 20/12/2016
+-- ACBrUtil --
+[*] FormatFloatBr e FloatMask. Ajuste para usar separador de milhar, na mascara
+    padrão ',0.00'   (por: DSA)
+
+Data: 08/12/2016
+-- ACBrUtil --
+[+] Adição de mais um formatmask
+    por: Juliomar Marchetti
+
+Data: 24/10/2016
+-- ACBr.inc --
+[*] Ajuste para permitir a compilação em 32 e 64 bits com suporte a
+    Libxml2, libxslt, libxmlsec compiladas por MinGw (default em Win64)
+    ftp://ftp.zlatkovic.com/libxml/64bit/    (por: DSA)
+
+Data: 23/09/2016
+-- ACBrUtil --
+[+] Adicionado o método: function ForceForeground(AppHandle:HWND): boolean;
+    para resolver problemas de Foco na troca de aplicações  (por: DSA)
+[+] Adicionado o método:
+    procedure WriteToFile(const Arq: String; ABinaryString: AnsiString);
+    para facilitar a escrita de arquivos de qualquer Tipo  (por: DSA)
+
+Data: 02/09/2016
+-- ACBrConsts --
+[-] Ajustado cTAGS_BARRAS e cTAGS_BARRAS_HELP que estavão com o número de elementos 
+    errados ocasionando erro ao solicitar cTAGS_BARRAS_HELP[13].
+    (por: Rodrigo Frühwirth)
+[+] Adicionado enumerador QrCode para que posso ser implementado nas demais ECFs.
+    (por: Rodrigo Frühwirth)
+
+Data: 08/09/2016
+--ACBrAAC, ACBrPAFClass
+[+] Adição do campo data para guardar no arquivo criptografado e imprimir na ecf
+    do paf-ecf 02.04
+    http://www.projetoacbr.com.br/forum/index.php?showtopic=32295
+    por: Juliomar Marchetti
+
+Data: 29/08/2016
+--ACBrAAC
+[+] Adição do número do credenciamento ao arquivo para gerar o bloco X
+    por : Juliomar Marchetti
+
+Data: 29/08/2016
+-- ACBrUtil --
+[-] Correção no método "TruncTo", onde poderia ocorrer falha em valores
+    específicos... Nova Implementação, baseada em "TruncFix".
+    Novo teste adicionado em "ACBrComumTestCases"  (por: DSA)
+
+Data: 25/08/2016
+-- ACBrUtil --
+[*] Ajuste para os métodos "FunctionDetect" e "UnLoadLibrary" funcionarem
+    adequadamente em FPC 64 bits   (por: DSA)
+
+Data: 19/08/2016
+-- ACBrUtil --
+[-] Correção em PadLeft, PadRight, PadCenter, PadSpace, para considerar o tamanho
+    correto da String, com caracteres acentuados (UTF8) em FPC
+[+] Adicionado o método
+    function LenghtNativeString(const AString: String): Integer;
+[-] Correção no método "FindSubDirectories", para correto funcionamento em Linux
+    (por: DSA)
+
+Data: 18/08/2016
+-- ACBrUtil --
+[-] Correção para o método "TruncTo", que poderia falhar em alguns casos.
+[+] Adicionado o método "SimpleTruncTo", para auxiliar "TruncTo"
+[+] Adicionado Teste Unitário para TruncTo em ACBrUtilTest
+    http://www.projetoacbr.com.br/forum/topic/31778-testecase/
+    (por: Waldir Paim)
+
+Data: 16/08/2016
+-- ACBrUtil --
+[+] Adicionado o método "RemoveZerosEsquerda"   (por: DSA)
+[-] Correção em "AjustaLinhas", para processar corretamente linhas vazias e
+    "PadLinhas = True"
+
+Data: 13/06/2016
+-- ACBrUtil --
+[+] Adicionado os métodos  (por: DSA)
+    "ConverteXMLtoNativeString":  Se XML contiver a TAG de encoding em UTF8, no
+      seu início, remove a TAG e converte o conteudo do mesmo para String Nativa
+      da IDE
+    "ObtemDeclaracaoXML": Retorna a Declaração do XML, Ex: <?xml version="1.0"?>
+    "RemoverDeclaracaoXML": Retorna XML sem a Declaração.
+	
+Data: 12/08/2016
+-- ACBrUtil --	
+[*] Adicionada função RemoveZerosEsquerda() movida da unit ACBrValidador no pacote ACBrDiversos.
+
+Data: 23/03/2016
+-- ACBrUtil --
+[*] Nova Revisão de métodos que usavam AnsiString, modificando-os quando possível,
+    para usar "String", a fim de diminuir o número de Warnings de compilação
+    (por: Waldir Paim e DSA)
+    http://www.projetoacbr.com.br/forum/topic/28345-remoção-de-hints-e-warning-do-acbr/?do=findComment&comment=191110
+
+Data: 22/03/2016
+-- ACBrUtil --
+[*] Revisão de métodos que usavam AnsiString, modificando-os quando possível,
+    para usar "String", a fim de diminuir o número de Warnings de compilação
+    (por:DSA)
+
+Data: 11/03/2016
+-- ACBr.inc --
+[+] Adicionada a diretiva USE_DELAYED. Que deve ser ligada caso o programador
+    deseje utilizar a carga tardia de DLLs (OpenSSL e XMLSec)
+    A diretiva será desligada se a IDE não suportar carga tardia com "DELAYED"
+    http://www.projetoacbr.com.br/forum/index.php?showtopic=28561
+
+Data: 08/03/2016
+-- ACBrUtil --
+[-] RoundABNT: Correção para calculos com valores negativos  (por: DSA)
+
+Data: 04/03/2016
+-- ACBr.inc --
+[*] Adicionada verificação para saber se está usando FPC 3.0.0 ou superior
+[*] Adicionada verificação para saber se o compilador tem o método "CharInSet"
+
+-- ACBrUtil --
+[*] Lazarus, usando "LConvEncoding" por default
+[*] Método "ACBrStrToUTF8" renomeado para "NativeStringToUTF8"
+[+] Adicionado os métodos:
+    function UTF8ToNativeString( AUTF8String : AnsiString ) : String;
+    function NativeStringToAnsi( AString : String ) : AnsiString;
+    function AnsiToNativeString( AAnsiString : AnsiString ) : String;
+[*] Simplificação dos métodos "ACBrStr" e "ACBrStrToAnsi", para Lazarus
+[+] Adicionado o método "CharInSet" se não estiver definido HAS_CHARINSET
+
+
+Data: 26/02/2016
+-- ACBrConsts --
+[+] Adicionadas constantes para manipulação de Encoding UTF8
+
+-- ACBrUtil --
+[+] function ACBrUTF8ToAnsi( UTF8String : AnsiString ) : AnsiString;
+    Converte uma String que está em UTF8 para ANSI, considerando as diferetes IDEs
+    suportadas pelo ACBr
+
+[+] function ACBrAnsiToUTF8( AAnsiString : AnsiString ) : AnsiString;
+    Converte uma String que está em ANSI para UTF8, considerando as diferetes IDEs
+    suportadas pelo ACBr
+
+Data: 22/02/2016
+-- ACBrUtil --
+[*] RoundABNT, aplicado workaround para funcionamento em D7
+    (problemas com função "frac")
+[*] CreateFormatSettings, modificado para considerar os valores atribuídos as
+    variáveis Globais de ACBrUtil ex: "ThousandSeparator" (Delphi XE)
+[*] StringToBinaryString, aplicado workaround para funcionamento em D7
+    (problemas com StringReplace contendo caracter Nulo (#0)
+
+Data: 10/12/2015
+-- ACBrUtil --     (por: DSA)
+[+] Adicionado os métodos:
+    function StrIsHexa(const S: String): Boolean;
+    function CharIsHexa(const C: Char): Boolean;
+[-] Correção em "StringToBinaryString" para não se confundir com Strings não
+    Hexa (Ex: '\xml')
+
+Data: 04/12/2015
+-- ACBrUtil --
+[-] Correção em RoundABNT, para evitar Erro de oveerflow em valores grandes
+    (por: DSA)
+
+Data: 13/11/2015
+-- ACBrUtil --
+[*] Ajuste em "FloatToString", para não remover o ThousandSeparator se ele for
+    identico a DecimalSeparator
+    http://www.projetoacbr.com.br/forum/index.php?showtopic=25929
+
+Data: 18/09/2015
+-- ACBrUtil --         (por: DSA)
+[*] ACBrStr modificada para não tentar converter para UTF8, mas sim para UNICODE
+    nas IDEs de Delphi XE
+[*] ParseText modificada para não tentar converter de UTF8 para String nativa
+    quando estiver efetuando um "Encode"
+
+Data: 16/09/2015
+-- ACBrUtil --         (por: DSA)
+[+] Adiconado o método:
+    function ACBrStrToUTF8( AString : String ) : AnsiString;
+    que pode ser usado para converter uma String nativa da IDE para UTF8
+
+Data: 08/09/2015       (por: DSA)
+-- ACBrUtil --
+[-] Correção em "StripHTML", problema de Loop Infinito, quando usando Tags sem
+    fechamento Ex: "><".
+[+] Adicionado o método: AcharProximaTag(const AString: AnsiString;
+     const PosIni: Integer; var ATag: AnsiString; var PosTag: Integer);
+     usado por StripHTML e TagProcessor
+
+Data: 31/07/2015       (por: DSA)
+-- ACBrUtil --
+[-] Correção em "QuebraLinhas", quando o LineBreak era no mesmo ponto da Quebra
+
+Data: 26/07/2015       (por: DSA)
+-- ACBrUtil --
+[+] Movido os seguintes métodos de ACBrDFeUtil
+function XmlEhUTF8(const AXML: String): Boolean;
+function ConverteXMLtoUTF8(const AXML: String): String;
+
+[*] Método "QuebraLinhas" modificado para respeitar as Quebras de Linha 
+   existentes no texto
+
+Data: 14/07/2015       (por: Regys Silveira)
+-- ACBrUtil --
+[*] Adicionado overload de FormatFloatBr com parametro de mascara pre-definida.
+
+Data: 06/07/2015       (por: DSA)
+-- ACBrUtil --
+[*] Ajuste para não carregar inpout32 e BlockInput na inicialização do sistema
+    sem necessidade
+
+Data: 04/05/2015       (por: DSA)
+-- ACBrUtil --
+[+] Adicionado o método: OnlyCharsInSet
+
+-- ACBrConsts --
+[*] Modificação dos Arrays de Tags de formatação
+
+Data: 22/12/2014
+-- ACBrTXTClass --  (por: DSA)
+[-] Ajustes para algumas situações de erro de calculo de arredondamento em LFILL
+
+Data: 20/12/2014   
+-- ACBrBase --    (por: DSA)
+[+] Adicionado evento padrão para chamada de Log:
+    TACBrGravarLog = procedure(const ALogLine: String; var Tratado: Boolean) of object ;
+
+Data: 27/11/2014
+[-] Corrigido problema na unit DFeUtil onde estava errado o Define impossibilitando
+	compilar no lazarus
+	Por: Juliomar
+	
+Data: 21/11/2014
+-- ACBrEAD --        (por: DSA)
+[+] Adicionada Propriedade "BufferSize: Integer" default 32768
+    ( Valor de Bytes a serem lidos a cada interação nos Calculos )
+[+] Adicionado evento: OnProgress = procedure(const PosByte, TotalSize: Int64)
+    ( Chamado a cada Interação do Calculo )
+[*] Métodos: RemoveEAD, VerificarEAD, CalcularHash, CalcularAssinatura, CalcularEAD
+    modificados para receber um tipo TStream ao inves de apenas TMemoryStream
+[*] Métodos: CalcularHashArquivo, CalcularAssinaturaArquivo, CalcularEADArquivo
+    modificados, para permitir o calculo Hashs e Digest em arquivos gigantescos,
+    e diminuir o consumo de memória
+[-] Corrigido Bug no método CalcularEAD(const AStream: TStream) que sempre
+    adicionava "LineBreak" no calculo do Hash do arquivo.
+[*] Método AssinarArquivoComEAD modificado para verificar se precisa adicionar
+    "LineBreak" no final do Arquivo, antes de calcular o EAD.
+[+] Adicionado os métodos: LeEADArquivo(const NomeArquivo: String): AnsiString;
+    LeEAD(AStream: TStream): AnsiString; que Retornam o EAD encontrado no
+    final do arquivo, se o mesmo existir.
+[*] Refactoring em CalcularEAD(const AStream: TStream), para usar o método
+    "InternalDigest"
+[*] Métodos InternalDigest modificado para permitir o calculo em Streams
+    genéricos e arquivos gigantescos
+[*] Método "VerificarEAD" modificado para permitir o calculo em Streams
+    genéricos e arquivos gigantescos
+
+-- EADTeste --
+[*] Demos de Delphi e Lazarus modificados para demonstrar as novas propriedades
+    métodos e eventos.
+
+
+Data: 29/10/2014
+-- ACBrEAD --        (por: DSA)
+[+] Adicionado suporte ao algorítimo sha256
+[+] Criado novo Tipo: TACBrEADDgstOutput = (outHexa, outBase64) ;
+    que pode ser informado nos métodos: CalcularHashArquivo, CalcularHash,
+    CalcularAssinaturaArquivo, CalcularAssinatura
+[*] Métodos: CalcularHashArquivo, CalcularHash, modificados para receber como
+    parâmetro o Tipo de saida (OutputType: TACBrEADDgstOutput = outHexa)
+[+] Adicionado os métodos:
+    function CalcularAssinaturaArquivo( const NomeArquivo: String;
+       const Digest: TACBrEADDgst;
+       const OutputType: TACBrEADDgstOutput = outHexa ): AnsiString ; overload ;
+    function CalcularAssinatura( const AString : AnsiString;
+       const Digest: TACBrEADDgst;
+       const OutputType: TACBrEADDgstOutput = outHexa ): AnsiString ; overload ;
+    function CalcularAssinatura( const AStringList : TStringList;
+       const Digest: TACBrEADDgst;
+       const OutputType: TACBrEADDgstOutput = outHexa ): AnsiString ; overload ;
+    function CalcularAssinatura( const MS : TMemoryStream;
+       const Digest: TACBrEADDgst;
+       const OutputType: TACBrEADDgstOutput = outHexa ): AnsiString ; overload ;
+[*] Ajuste nos Demos "EADTeste" de Delphi e Lazarus, para demonstrar e testar os
+    novos métodos.
+[*] Pacote "ACBrComum" de Delphi e Lazarus modificado para conter dependencia
+    do pacote "synapse"
+
+Data: 20/10/2014
+-- ACBrSpedFiscal --
+[-] Corrigido problema com validação de variant para number, alterado ACBrTXTClass.pas na função VLFill
+    para utilizar nativa do delphi/lazarus VarIsNumeric.
+	http://www.projetoacbr.com.br/forum/index.php?/topic/17921-aliq-icms-com-decimal/
+	por: Juliomar Marchetti
+	
+Data: 08/10/2014
+-- ACBrDFeUtil 
+[-] Corrigito o calculo do DV na Função Modulo 11.
+    por: Italo Jurisato Junior 
+
+Data: 28/05/2014
+-- ACBrTXT ( por Isaque Pinheiro)
+[*] Renomeado a função LFill() com o tipo Variant para VLFill() para resolver
+    problemas apresentados em versões adiversas do Delphi.
+
+Data: 23/05/2014
+-- ACBrTXT ( por Isaque Pinheiro)
+[+] Adicionada a função:
+    LFill(Value: Variant;
+          Size: Integer;
+          Decimal: Integer;
+          Caracter: Char;
+          Mascara: String): String;
+    Função de sobrecarga com parâmetro do tipo Variant para aceitar valor NULL.
+
+Data: 23/05/2014
+-- ACBrUtil
+[+] Adicionada a função:
+    IsNumber(const Value: Variant): Boolean;
+    Função para checar se o conteúdo passado para ela é um valor numérico, usa
+    a função, nativa do delphi e lazaruz, Val() para reconhecimento.
+
+Data: 12/09/2013
+-- ACBrAAC --
+[*] Modificação para não apagar os valores default do componente caso o arquivo
+    AAC seja inválido... (isso permite re-criar o arquivo)      (por: DSA)
+
+Data: 07/08/2013
+-- ACBrUtil --
+[+] Adicionada a função:                                              (por: DSA)
+    CompareVersions(const VersionStr1, VersionStr2: String; Delimiter: char ): Extended;
+ Compara 2 Strings de controle de versão. Delimiter padrão = '.'
+ Retorna 0 se VersionStr1 = VersionStr2
+ Retorna Valor Negativo se VersionStr1 < VersionStr2
+ Retorna Valor Positivo se VersionStr1 > VersionStr2
+ Retorna valor indicando as diferenças encontras de acordo com os niveis. Ex:
+ 1.0.3; 1=Major=100, 0=Minor=10, 3=Build=1
+ VersionStr1 VersionStr2       Result
+    1.0.3      1.0.4        0 + 0 -1 = -1
+    1.2.5      1.1.4        0 +10 +1 = 11
+    2.0.3      1.2.9       100-10 -1 = 89
+
+Data: 24/07/2013
+-- ACBrUtil --
+[+] Adicionada a função:                                              (por: DSA)
+    FloatToIntStr(const AValue: Double; const DecimalDigits: SmallInt = 2): String;
+    Converte um Double para string, SEM o separator decimal, considerando as
+     decimais como parte final da String. Ex: 100,00 = "10000"; 1,23 = "123"
+
+Data: 05/04/2013
+-- ACBrUtil --
+[+] Adicionado os metodos para conversão de Inteiros em Strings binárias no
+    formato Little Endian   (por: DSA)
+    function IntToLEStr(AInteger: Integer; BytesStr: Integer = 2): AnsiString;
+    function LEStrToInt(ALEStr: AnsiString): Integer;
+
+Data: 04/04/2013
+-- ACBrBase --
+[+] Tratamento para compilar no D6
+    (por: Isaque Pinheiro)
+
+Data: 01/04/2013
+-- ACBrBase --
+[+] Adicionado os métodos TACBrInformacoes.SaveToFile( AFileName: String) e
+    TACBrInformacoes.LoadFromFile( AFileName: String)   (por: DSA)
+
+Data: 27/03/2013
+-- ACBrUtil --
+[*] Ajustes para compilação em 64 bits (por: DSA)
+
+Data: 17/03/2013
+-- ACBr.inc --
+[*] Ajuste para compilar corretamente nas últimas versões do Lazarus e
+    FPC 2.7.1, que por padrão trazem a diretiva "CONSOLE" ligada   (por: DSA)
+
+Data: 28/02/2013
+-- ACBrAAC --
+[*] Melhoria na gravação dos Logs   (por: DSA)
+
+-- ACBrConsts --
+[*] Remoção da exibição dos Valores do Grande Total na Mensagem de erro de
+    divergência do G.T. (a pedido de homologador PAF-ECF)     (por: DSA)
+
+Data: 14/02/2013
+-- ACBrUtil --
+[+] Função DesligarMaquina modificada para permitir efetuar apenas o LogOff
+    DesligarMaquina(Reboot: Boolean = False; Forcar: Boolean = False;
+                    LogOff: Boolean = False) ;                        (por: DSA)
+
+Data: 01/02/2013
+-- ACBrAAC --
+[-] Correção para gravar a propriedade paraiba legal
+    (Regys Silveira)
+
+Data: 28/01/2013
+-- ACBrUtil --
+[+] Adicionada função para ler conteudo de Tags de XML   (por: DSA)
+    function LerTagXML( const AXML, ATag: String; IgnoreCase: Boolean = True) : String;
+[-] Corrigido bug em DecodeToSys, quando operando com Parâmetros utf-8
+
+Data: 20/12/2012
+-- ACBrUtil --
+[*] Modificação em ACBrStr, para usar o método: SysToUTF8 quando for Lazarus/FPC
+
+22/11/2012
+-- ACBrDFeUtil
+[+] Unificação de funções de mesma funcionalidade das units:
+    ACBrNFeUtil, ACBrNFEsUtil, ACBrCTeUtil
+    (por Isaque Pinheiro)
+
+22/10/2012
+-- ACBrPafClass --
+[+] Adicionado a impressão do Nota Legal e do Paríba Legal no relatório de 
+    configurações do Paf-ECF. 
+    (por: Regys Silveira)
+
+13/09/2012
+-- ACBrUtil --
+[-] Corrigido Bug de perda de acentos em sistemas com Unicode na
+    function ParseText      (por: DSA)
+
+27/08/2012
+-- ACBrUtil --
+[-] Ajuste em RunCommand para compatibilizar com FPC 2.7.1     (por: DSA)
+
+20/08/2012
+-- ACBrEAD --
+[-] Ajuste no método RemoverEAD, para suportar arquivos assinados com linha de
+    EAD que terminam com LineBreak    (por: DSA)
+
+20/06/2012
+-- ACBrEAD --
+[-] Acertos gerais que estavam impedindo a validação da assinatura, algo a ver
+    com a conversão de strings e ansistrings.
+[*] Acerto nas exception do EAD e mensagem quando quando não conseguir 
+    validar o EAD
+    (por: Regys Silveira)
+
+23/05/2012
+-- ACBrAAC --
+[+] Adicionado a propriedade virtual "ArquivoInvalido". Após executar um comando
+    e o mesmo detectar que o arquivo é inválido, podemos antes de disparar os demais 
+    comandos, checar se o arquivo já foi inválidado, evitando assim achecagem 
+    desnecessária por cada comando disparado. (por: Isaque Pinheiro)
+[+] Implementado recurso para identificar se o arquivo auxiliar foi modificado
+    ou editado por programas de terceiros, disparando mensagem de arquivo 
+    inválido (por: Isaque Pinheiro e DSA)
+
+08/05/2012
+-- ACBrBase --
+[+] Remoção de warning do ACBrBase para métodos deprecated.
+    (por: Regys Silveira)
+
+06/05/2012
+-- ACBrEAD --
+[+] Adicionado método: Function RemoveEAD( MS : TMemoryStream ) : AnsiString;
+    (por: DSA)
+[*] Método: AssinarArquivoComEAD modificado para ser compatível com arquivos que
+    não usam a mesma quebra de Linha do Sistema Operacional.
+    - Adicionada detecção da presença de quebra de linha no final do arquivo
+      antes de adicionar a linha do EAD         (por: DSA)
+[*] Método: RemoveEADArquivo modificado para ser compatível com arquivos que
+    não usam a mesma quebra de Linha do Sistema Operacional.    (por: DSA)
+
+01/05/2012
+-- ACBrEAD --
+[+] Adicionada Function CalcularChavePublica_eECFc( ArquivoXML: String) : AnsiString;
+    que permite converter um arquivo no formado XML do padrão eECFc para uma
+    chave Pública no formado OpenSSL  (por: DSA)
+[*] Evento OnGetChavePublica modificado para aceitar Chaves no formato do
+    arquivo XML usado pelo programa eECFc. Basta ler o Conteudo deste arquivo
+    e informar o mesmo para a variável "Chave" passada por referência no evento.
+    O ACBrEAD usará as Tags <modulo> e <expoente_publico> para computar a chave
+    Publica e proceder com a verificação das assinaturas EAD  (por: DSA)
+
+02/02/2012
+-- ACBrEAD --
+[*] Remoção das warnings por conversão de string.
+    (Régys Silveira)
+
+30/04/2012
+-- ACBrEAD, ACBrUtil --
+[*] Remoção das warnings por conversão de string.
+    (Régys Silveira)
+
+04/04/2012
+-- ACBrUtil --
+[*] Otimização na função AjustaLinhas  (DSA)
+
+22/03/2012
+-- ACBrAAC --
+[-] Ocorria erro quando o arquivo era criado em branco e quando não se 
+    habilitava a gravação de algumas sessões
+    (por: Regys Silveira)
+
+15/03/2012
+-- ACBrAAC --
+[+] Criado novo evento: OnVerificarRecomporNumSerie
+    procedure( const NumSerie: String; const ValorGT : Double; var CRO: Integer;
+               var CNI: Integer)
+    Será disparado quando o ACBrAAC não encontrar o Numero de Série do ECF na
+    lista de ECFs liberados, o que pode ocorrer quando o arquivo estiver
+    corrimpido    (Por: DSA)
+
+[+] Criada nova propriedade: IdentPAF.Paf.RecompoeNumSerie : Boolean
+    Se for True, e não encontar o Num.Serie, tenta executar o evento
+    OnVerificarRecomporNumSerie   (por: DSA)
+
+[*] Evento OnVerificarRecomporValorGT somente será disparado quando:
+    sIdentPAF.Paf.RecompoeGT = True    (por: DSA)
+
+-- TACBrTXTClass --
+[*]  Método TACBrTXTClass.WriteBuffer modificado para nao criar arquivos
+     como UTF8, o que pode causar problemas nos programas de validação.
+     Problema ocorria WinXP, em Sistemas compilados com IDE com suporte a
+     Unicode     (por: DSA)
+
+-- ACBrUtil --
+[*]  Pequena otimização na function: WriteToTXT   (por: DSA)
+
+Data: 01/03/2012
+-- ACBrPAF --
+[-] Tentativa de correção da Ordanação da Lista DAVs Emitidos (DSA)
+
+06/02/2012
+-- ACBrAAC --
+[+] Adicionada verificação de CRC na Gravacao/Abertura do arquivo AAC. Para
+    testar por corrupção de dados (por: DSA)
+
+02/02/2012
+-- ACBrAAC, ACBrPaf --
+[*] Adição do campo de Codigo Nacional de Identificação do ECF ao AAC
+    conforme tópico: http://djsystem.com.br/acbr/forum/viewtopic.php?f=20&t=3048
+    merge: RBS
+
+17/01/2012
+-- ACBrAAC, ACBrPAF --
+[*] Adição de novos campos que devem ser informados no relatório de configuração
+    do paf-ECF, gravação dos campos no arquivo auxiliar.
+    por: Régys Silveira
+
+05/12/2011
+-- ACBrNFe2 --
+[*] Inclusão de diretivas de compilação para o Delphi XE2 nos Danfes para RAVE
+    por: juaumkiko
+
+29/11/2011
+-- ACBrEAD --
+[*] Adicionadas as configurações do Paf-ECF ao AAC
+    por: Régys Silveira
+
+20/10/2011
+-- ACBrEAD --
+[*] Acerto no método UnLoadLibrary para compilar no delphi 9 acima
+    por: Régys Silveira
+
+20/10/2011
+-- ACBrEAD --
+[+] Adicionado o método:
+    procedure TACBrEAD.RemoveEADArquivo(const NomeArquivo : String)
+
+24/08/2011
+-- ACBrAAC --
+[-] Acerto no método que atualização do MD5.
+
+11/08/2011
+-- ACBrAAC --
+[+] Adicionada a propriedade EfetuarFlush : Boolean = True
+    Se True, chama rotina que descarrega Cache de memória no disco, para
+    garantir a gravação do arquivo.
+
+-- ACBrUtil --
+[+] Adicionada a função: FlushToDisk(sDriveLetter: string): boolean;
+
+Data: 27/07/2011
+-- ACBrUtil --
+[-] Corrigido o método AjustaLinhas para considerar as tags de formatação
+    estava colocando a quebra de linha no meio delas e causando erros
+    (por: Régys Silveira)
+
+Data: 05/06/2011
+-- ACBTXTClass --
+[-] Corrigido o método DFill, que ao receber o parametro DFill(15.00, 3)
+    retornava 15 e o correto pelo Guia Pratico deveria voltar 15,000
+    (por Isaque Pinheiro)
+
+Data: 03/06/2011
+-- ACBPAFClass --
+[*] Recebeu as class "TACBrECFDAV" e "TACBrECFDAVs" que estavam em ACBrECFClass 
+    (por: Isaque Pinheiro)
+
+01/06/2011
+-- ACBrAAC --
+[*] Ampla reforma nas propriedades de Identificação da S.H. e PAF, que foram
+    substiuidas por tipos já existente no ABCrECF, mais completos e organizados
+  ACBrAAC1.SH_RazaoSocial -> ACBrAAC1.IdentPAF.Empresa.RazaoSocial
+  ACBrAAC1.SH_CNPJ        -> ACBrAAC1.IdentPAF.Empresa.CNPJ
+  ACBrAAC1.SH_IM          -> ACBrAAC1.IdentPAF.Empresa.IM
+  ACBrAAC1.SH_IE          -> ACBrAAC1.IdentPAF.Empresa.IE
+  ACBrAAC1.PAF_Nome       -> ACBrAAC1.IdentPAF.Paf.Nome
+  ACBrAAC1.PAF_Versao     -> ACBrAAC1.IdentPAF.Paf.Versao
+  ACBrAAC1.PAF_MD5        -> ACBrAAC1.IdentPAF.ArquivoListaAutenticados.MD5
+
+  Nota: Apesar da modificação os arquivos AAC gerados continuam compatíveis.
+
+[*] A Class "TACBrECFIdentificacaoPAF", que era instanciada avulsa, para guardar 
+    informações, passou a fazer parte do componente ACBrAAC, basta agora alimentar
+    a propriedade IdentPAF do ACBrAAC, la estão todas as informações necessárias
+    (por Isaque Pinheiro)
+
+[*] Melhor integrado com ACBrPAF. Quando inteligados com o ACBrPAF, se o ACBrAAC 
+    tiver nele todos os dados, os registros N1, N2 e N3, serão automaticamente 
+    preenchidos necessitando apenas chamar o método ACBrPAF.SaveFileTXT_N(NomeArquivo), 
+    para que o arquivo seja gerado e o MD5 seja atualizado no arquivo auxiliar.
+
+   Nota: Caso não tenha todos os dados no ACBrAAC, poderá alimentar as informações
+         manualmente antes de chamar o método ACBrPAF.SaveFileTXT_N(NomeArquivo);
+
+[*] Melhor integrado com o ACBrECF. Quando interligados o ACBrECF e a 
+    propriedade ACBrAAC.IdentPAF, recebe todas as informações que antes era 
+    armazenadas em uma class "TACBrECFIdentificacaoPAF", essa proprieade será 
+    usada como parametro para a impressão da identificação do PAF-ECF pelo método 
+    do MF(PafMF_RelIdentificacaoPafECF;) bastando chamar o método sem parametro.
+
+   Nota: Caso não esteja interligado ao ACBrECF, mas queira usar a propriedade
+         ACBrAAC.IdentPAF, para não ter que instanciar uma class 
+         "TACBrECFIdentificacaoPAF", poderá chamar o método do MF passando a 
+         propriedade como parametro:
+         PafMF_RelIdentificacaoPafECF(ACBrAAC.IdentPAF);
+
+12/05/2011
+-- ACBrAAC --
+[+] Adicionado o Evento "VerificarRecomporValorGT", que será chamado sempre que
+    o ACBrAAC detectar que o Valor do G.T. não confere com o do arquivo... Nesse 
+    caso, programe o Evento, e caso a recuperação do GT seja permitida (de acordo 
+    com as regras do PAF-ECF), informe na variável ValorGT o valor correto. O 
+    componente ACBrAAC irá atualizar o GT no arquivo e NAO informará o Erro -2
+    (por: DSA)
+
+09/05/2011
+-- ACBrAAC --
+[*] Componente ACBrAAC volta para o Package ACBrComum, para poder ser usado por
+    ACBrECF e ACBrPAF.. (por: DSA)   
+	** NOTA: Isso exige a completa re-instalação dos Packages ACBrComum e ACBrSerial
+
+	05/05/2011
+-- ACBrArqAuxCriptografado
+[+] Componente movido para ACBrSerial, por favor leia ACBrSerial-change-log.txt
+
+04/04/2011
+-- ACBrEAD
+[+] Métodos para geração do MD5 de arquivos e strings diretamente.
+    por: Régys Silveira
+
+28/03/2011
+-- ACBrArqAuxCriptografado
+[+] Novo componente para controle do arquivo auxiliar criptografado do PAF-ECF
+    por: Régys Silveira
+
+22/02/2011
+-- ACBrEAD --
+[*] Métodos de MD5 modificados para permitir todos os mecanismos de Digest do
+    OpenSSL. permitindo os seguintes calculos de HASH: (MD2, MD4, MD5, RMD160,
+    SHA, SHA1).
+    Infelizmente isso "quebrou" a assinatura do componente, mas o ajuste é
+    rápido. Exemplo:
+    ACBrEAD1.CalcularMD5Arquivo( StrArqEntrada )              mudou para:
+    ACBrEAD1.CalcularHashArquivo( StrArqEntrada, dgstMD5 )
+
+01/02/2011
+-- ACBrEAD --
+[*] Unit ACBrEAD modificada para se tornar um componente. Portanto o package
+    ===>>> ACBrComum PRECISA SER RE-COMPILADO e INSTALADO <<<===
+
+[+] Novo componente ACBrEAD destinado a ser uma interface com o OpenSSL para
+    Fazer e Verificar assinatura digital, usando chaves RSA, implementando os
+    seguinte métodos:
+
+    Procedure GerarChaves( var AChavePublica : AnsiString;
+       var AChavePrivada : AnsiString ) ;
+    function AssinarArquivoComEAD( const NomeArquivo: String) : AnsiString ;
+    function VerificarEADArquivo( const NomeArquivo: String): Boolean ; overload ;
+    function VerificarEAD( const AString : AnsiString): Boolean ; overload ;
+    function VerificarEAD( const AStringList : TStringList): Boolean ; overload ;
+    function VerificarEAD( const MS : TMemoryStream; EAD: AnsiString):
+       Boolean ; overload ;
+    Function GerarXMLeECFc( const NomeSwHouse, Diretorio : String ) : Boolean ;
+    Procedure CalcularModuloeExpoente( var Modulo, Expoente : AnsiString );
+    Function CalcularChavePublica : AnsiString ;
+    function CalcularMD5Arquivo( const NomeArquivo: String): AnsiString ; overload ;
+    function CalcularMD5( const AString : AnsiString): AnsiString ; overload ;
+    function CalcularMD5( const AStringList : TStringList): AnsiString ; overload ;
+    function CalcularMD5( const MS : TMemoryStream): AnsiString ; overload ;
+    function CalcularEADArquivo( const NomeArquivo: String): AnsiString ; overload ;
+    function CalcularEAD( const AString : AnsiString): AnsiString ; overload ;
+    function CalcularEAD( const AStringList : TStringList): AnsiString ; overload ;
+    function CalcularEAD( const MS : TMemoryStream): AnsiString ; overload ;
+
+    - Veja na pasta ACBr\Exemplos\ACBrEAD projetos com Exemplos de uso para uma
+      melhor compreensão de como usar o componente...
+    - No Delphi isso causará a dependencia estática da DLL libeay32.dll em todos
+      os programas que usem os componentes ACBrECF, ACBrRFD ou ACBrPAF
+    - A DLL pode ser encontrada em: ACBr\DLLs\OpenSSL
+    - Copie-a para a pasta do seu executável.
+

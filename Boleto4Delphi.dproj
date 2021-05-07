@@ -13,16 +13,6 @@
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Android' and '$(Base)'=='true') or '$(Base_Android)'!=''">
-        <Base_Android>true</Base_Android>
-        <CfgParent>Base</CfgParent>
-        <Base>true</Base>
-    </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Android64' and '$(Base)'=='true') or '$(Base_Android64)'!=''">
-        <Base_Android64>true</Base_Android64>
-        <CfgParent>Base</CfgParent>
-        <Base>true</Base>
-    </PropertyGroup>
     <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
         <Base_Win32>true</Base_Win32>
         <CfgParent>Base</CfgParent>
@@ -58,12 +48,6 @@
         <DCC_CBuilderOutput>All</DCC_CBuilderOutput>
         <SanitizedProjectName>Boleto4Delphi</SanitizedProjectName>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Base_Android)'!=''">
-        <DCC_CBuilderOutput>None</DCC_CBuilderOutput>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Base_Android64)'!=''">
-        <DCC_CBuilderOutput>None</DCC_CBuilderOutput>
-    </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <BT_BuildType>Debug</BT_BuildType>
@@ -81,6 +65,9 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
+        <DCC_UnitSearchPath>D:\Repositorios\boleto4d\src;D:\Repositorios\boleto4d\src\third;D:\Repositorios\boleto4d\src\third\ACBr;D:\Repositorios\boleto4d\src\third\ACBr\ACBrBoleto;D:\Repositorios\boleto4d\src\third\ACBr\ACBrBoleto\FC;D:\Repositorios\boleto4d\src\third\ACBr\ACBrBoleto\FC\Fortes;D:\Repositorios\boleto4d\src\third\ACBr\ACBrBoleto\Logos;D:\Repositorios\boleto4d\src\third\ACBr\ACBrBoleto\Logos\Colorido;D:\Repositorios\boleto4d\src\third\ACBr\ACBrBoleto\Logos\PretoBranco;D:\Repositorios\boleto4d\src\third\ACBr\ACBrBoleto\WS;D:\Repositorios\boleto4d\src\third\ACBr\ACBrComum;D:\Repositorios\boleto4d\src\third\ACBr\ACBrDFe;D:\Repositorios\boleto4d\src\third\ACBr\ACBrDiversos;D:\Repositorios\boleto4d\src\third\ACBr\ACBrTCP;D:\Repositorios\boleto4d\src\third\ACBr\PCNComum;D:\Repositorios\boleto4d\src\third\ACBr\Terceiros;D:\Repositorios\boleto4d\src\third\ACBr\Terceiros\CodeGear;D:\Repositorios\boleto4d\src\third\ACBr\Terceiros\Ole;D:\Repositorios\boleto4d\src\third\ACBr\Terceiros\synalist;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -113,11 +100,17 @@
                 <Source>
                     <Source Name="MainSource">Boleto4Delphi.dpk</Source>
                 </Source>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="D:\Projetos\Componentes\ACBr\Lib\Delphi\LibD27\Win32\DCLACBr_Comum.bpl">ACBr - (design-time) Biblioteca Comum, EAD, AAC  - (http://www.projetoacbr.com.br/)</Excluded_Packages>
+                    <Excluded_Packages Name="D:\Projetos\Componentes\ACBr\Lib\Delphi\LibD27\Win32\DCLACBr_Diversos.bpl">ACBr - (design-time) Calculadora, Extenso, Validador, Troco, CMC7, Fala, BarCode, EnterTab, GIF, QrCode, InStore, CargaBal - (http://www.projetoacbr.com.br/)</Excluded_Packages>
+                    <Excluded_Packages Name="D:\Projetos\Componentes\ACBr\Lib\Delphi\LibD27\Win32\DCLACBr_Integrador.bpl">ACBr - (design-time) Integrador - (http://www.projetoacbr.com.br/)</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k270.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp270.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\21.0\Bpl\CEF4Delphi_FMX.bpl">CEF4Delphi</Excluded_Packages>
+                </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3"/>
             <Platforms>
-                <Platform value="Android">False</Platform>
-                <Platform value="Android64">False</Platform>
                 <Platform value="Win32">True</Platform>
                 <Platform value="Win64">False</Platform>
             </Platforms>

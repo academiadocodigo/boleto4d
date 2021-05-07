@@ -30,7 +30,8 @@ type
 implementation
 
 uses
-  ACBrBoletoConversao, pcnConversao, ACBrDFeSSL, blcksock, REST.Json;
+  ACBrBoletoConversao, pcnConversao, ACBrDFeSSL, blcksock, REST.Json,
+  System.AnsiStrings;
 
 { TComponentsACBrBoleto }
 
@@ -146,11 +147,6 @@ begin
   FComponent.Cedente.Cidade := aValue.Cedente.Cidade;
   FComponent.Cedente.CEP := aValue.Cedente.CEP;
   FComponent.Cedente.Telefone := aValue.Cedente.Telefone;
-  //ACBrBoleto1.Cedente.CodigoCedente     := '4863177';
-  //ACBrBoleto1.Cedente.Convenio	      := '1014051';
-  //ACBrBoleto1.Cedente.Modalidade        := '19';
-  //Carteira            := '17';
-  //EspecieDoc 	    := '99';
 end;
 
 class function TBoleto4DComponentsACBrBoleto.New: iBoleto4DComponent;

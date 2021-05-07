@@ -208,7 +208,7 @@ end;
 constructor TBoleto4DAttributesCedente.Create(aParent : iBoleto4D);
 begin
   FParent := aParent;
-  FWebService := TModelServicesBoletoCedenteWebService.New(Self);
+  FWebService := TBoleto4DAttributesCedenteWebService.New(Self);
 end;
 
 destructor TBoleto4DAttributesCedente.Destroy;
