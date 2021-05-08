@@ -25,6 +25,7 @@ type
       function Report : iBoleto4DAttributesReport;
       function Titulo : iBoleto4DAttributesTitulo;
       function GerarPDF : iBoleto4D;
+      function GerarRemessa( aValue : Integer ) : iBoleto4D;
       function EnviarBoleto : iBoleto4D;
       function Retorno : String;
       function NomeArquivo : String;
@@ -57,6 +58,12 @@ begin
   FComponent.LerConfiguracoes(Self);
   FComponent.CriarTitulo(Self);
   FComponent.GerarPDF;
+end;
+
+function TBoleto4D.GerarRemessa(aValue: Integer): iBoleto4D;
+begin
+  Result := Self;
+  FComponent.GerarRemessa(aValue);
 end;
 
 function TBoleto4D.Banco: iBoleto4DAttributesBanco;

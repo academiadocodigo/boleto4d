@@ -18,13 +18,16 @@ type
       constructor Create;
       destructor Destroy; override;
       class function New : iBoleto4DComponent;
-      function LerConfiguracoes ( aValue : iBoleto4D ) : iBoleto4DComponent;
       function CriarTitulo ( aValue : iBoleto4D) : iBoleto4DComponent;
-      function GerarPDF : iBoleto4DComponent;
       function EnviarBoleto : iBoleto4DComponent;
       function GerarHTML : String;
-      function RetornoWeb : String;
+      function GerarPDF : iBoleto4DComponent;
+      function GerarRemessa ( aValue : Integer ) : iBoleto4DComponent;
+      function LerConfiguracoes ( aValue : iBoleto4D ) : iBoleto4DComponent;
       function NomeArquivo : String;
+      function NomeArquivoRemessa : String; overload;
+      function NomeArquivoRemessa ( aValue : String ) : iBoleto4DComponent; overload;
+      function RetornoWeb : String;
   end;
 
 implementation
@@ -107,6 +110,13 @@ begin
   FComponent.GerarPDF;
 end;
 
+function TBoleto4DComponentsACBrBoleto.GerarRemessa(
+  aValue: Integer): iBoleto4DComponent;
+begin
+  Result := Self;
+  FComponent.GerarRemessa(aValue);
+end;
+
 function TBoleto4DComponentsACBrBoleto.LerConfiguracoes(
   aValue: iBoleto4D): iBoleto4DComponent;
 begin
@@ -126,6 +136,7 @@ begin
   FComponent.Cedente.ContaDigito := aValue.Cedente.ContaDigito;
   FComponent.Cedente.TipoInscricao := TACBrPessoaCedente(aValue.Cedente.TipoInscricao);
   FComponent.LayoutRemessa := TACBrLayoutRemessa(aValue.Config.LayoutRemessa);
+  FComponent.DirArqRemessa := aValue.Config.DirArqRemessa;
   FComponent.Configuracoes.WebService.Ambiente := Tpcntipoambiente(aValue.Config.WebService.Ambiente);
   FComponent.Configuracoes.WebService.Operacao := TOperacao(aValue.Config.WebService.Operacao);
   FComponent.Configuracoes.WebService.SSLCryptLib := TSSLCryptLib(aValue.Config.WebService.SSLCryptLib);
@@ -157,6 +168,18 @@ end;
 function TBoleto4DComponentsACBrBoleto.NomeArquivo: String;
 begin
   Result := FReport.NomeArquivo;
+end;
+
+function TBoleto4DComponentsACBrBoleto.NomeArquivoRemessa(
+  aValue: String): iBoleto4DComponent;
+begin
+  Result := Self;
+  FComponent.NomeArqRemessa := aValue;
+end;
+
+function TBoleto4DComponentsACBrBoleto.NomeArquivoRemessa: String;
+begin
+  Result := FComponent.NomeArqRemessa;
 end;
 
 function TBoleto4DComponentsACBrBoleto.RetornoWeb: String;

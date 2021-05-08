@@ -22,13 +22,19 @@ type
     function Config : iBoleto4DAttributesConfig;
     function Titulo : iBoleto4DAttributesTitulo;
     function GerarPDF : iBoleto4D;
+    function GerarRemessa( aValue : Integer ) : iBoleto4D;
     function EnviarBoleto : iBoleto4D;
     function Retorno : String;
     function NomeArquivo : String;
+
   end;
 
   iBoleto4DAttributesConfig = interface
     ['{2428D847-151B-4D31-B8D0-7B9D3ACA70D2}']
+    function DirArqRemessa ( aValue : String ) : iBoleto4DAttributesConfig; overload;
+    function DirArqRemessa : String; overload;
+    function NomeArquivoRemessa : String; overload;
+    function NomeArquivoRemessa ( aValue : String ) : iBoleto4DAttributesConfig; overload;
     function LayoutRemessa (aValue : Integer ) : iBoleto4DAttributesConfig; overload;
     function LayoutRemessa : Integer; overload;
     function WebService : iBoleto4DAttributesConfigWebService;

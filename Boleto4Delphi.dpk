@@ -28,6 +28,40 @@ package Boleto4Delphi;
 {$IMPLICITBUILD ON}
 
 requires
-  rtl;
+  rtl,
+  vclimg,
+  vcl,
+  xmlrtl,
+  vclwinx,
+  soaprtl,
+  dbrtl,
+  inet,
+  vcldb,
+  RESTComponents,
+  frce,
+  ACBr_Comum,
+  ACBr_synapse,
+  ACBr_OpenSSL,
+  ACBr_Diversos,
+  ACBr_PCNComum,
+  ACBr_TCP,
+  ACBr_Boleto,
+  ACBr_DFeComum,
+  ACBr_BoletoRL;
+
+contains
+  Boleto4D.Attributes.Banco in 'src\Boleto4D.Attributes.Banco.pas',
+  Boleto4D.Attributes.Cedente in 'src\Boleto4D.Attributes.Cedente.pas',
+  Boleto4D.Attributes.Cedente.WebService in 'src\Boleto4D.Attributes.Cedente.WebService.pas',
+  Boleto4D.Attributes.Config in 'src\Boleto4D.Attributes.Config.pas',
+  Boleto4D.Attributes.Config.WebService in 'src\Boleto4D.Attributes.Config.WebService.pas',
+  Boleto4D.Attributes.Report.Config in 'src\Boleto4D.Attributes.Report.Config.pas',
+  Boleto4D.Attributes.Report in 'src\Boleto4D.Attributes.Report.pas',
+  Boleto4D.Attributes.Titulo in 'src\Boleto4D.Attributes.Titulo.pas',
+  Boleto4D.Attributes.Titulo.Sacado in 'src\Boleto4D.Attributes.Titulo.Sacado.pas',
+  Boleto4D.Components.ACBrBoleto in 'src\Boleto4D.Components.ACBrBoleto.pas',
+  Boleto4D.Components.Interfaces in 'src\Boleto4D.Components.Interfaces.pas',
+  Boleto4D.Interfaces in 'src\Boleto4D.Interfaces.pas',
+  Boleto4D in 'src\Boleto4D.pas';
 
 end.
