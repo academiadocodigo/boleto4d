@@ -26,7 +26,7 @@ type
     function EnviarBoleto : iBoleto4D;
     function Retorno : String;
     function NomeArquivo : String;
-
+    function ZerarListaBoletos: iBoleto4D;
   end;
 
   iBoleto4DAttributesConfig = interface

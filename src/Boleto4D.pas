@@ -29,6 +29,7 @@ type
       function EnviarBoleto : iBoleto4D;
       function Retorno : String;
       function NomeArquivo : String;
+      function ZerarListaBoletos: iBoleto4D;
   end;
 
 var
@@ -123,6 +124,12 @@ end;
 function TBoleto4D.Titulo: iBoleto4DAttributesTitulo;
 begin
   Result := FTitulo;
+end;
+
+function TBoleto4D.ZerarListaBoletos: iBoleto4D;
+begin
+  Result := Self;
+  FComponent.ZerarListaBoletos;
 end;
 
 end.

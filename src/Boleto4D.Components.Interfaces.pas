@@ -20,6 +20,7 @@ type
     function NomeArquivoRemessa ( aValue : String ) : iBoleto4DComponent; overload;
     function NomeArquivoRemessa : String; overload;
     function RetornoWeb : String;
+    function ZerarListaBoletos: iBoleto4DComponent;
   end;
 
 implementation

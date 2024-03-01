@@ -28,6 +28,7 @@ type
       function NomeArquivoRemessa : String; overload;
       function NomeArquivoRemessa ( aValue : String ) : iBoleto4DComponent; overload;
       function RetornoWeb : String;
+      function ZerarListaBoletos: iBoleto4DComponent;
   end;
 
 implementation
@@ -189,6 +190,12 @@ begin
   Result := '';
   for I := 0 to Pred(FComponent.ListaRetornoWeb.Count) do
     Result := Result + TJSON.ObjectToJsonstring(FComponent.ListaRetornoWeb.Objects[I]);
+end;
+
+function TBoleto4DComponentsACBrBoleto.ZerarListaBoletos: iBoleto4DComponent;
+begin
+  Result := Self;
+  FComponent.ListadeBoletos.Clear;
 end;
 
 end.
